@@ -23,57 +23,119 @@
 //    //    enumerator.Dispose();
 //}
 
-var people = new Person[]
-{
-    new Person("Tom"),
-    new Person("Bob"),
-    new Person("Sam")
-};
-var microsoft = new Company(people);
+using System;
 
-try
+public static class Program
 {
-    foreach (Person employee in microsoft.GetPersonnel(5))
+    //private static System.Collections.Generic.IEnumerator<bool> Temporal()
+    //{
+    //    try
+    //    {
+    //        yield return false;
+    //        yield return true;
+    //    }
+    //    finally
+    //    {
+    //        System.Console.Write("this is it!");
+    //    }
+    //}
+   
+    private static System.Collections.Generic.IEnumerable<long> Even()
     {
-        Console.WriteLine(employee.Name);
-            throw new Exception("error");
-    }
-}
-catch (Exception ex)
-{
 
-    Console.WriteLine(ex.Message);
-}
-
-class Person
-{
-    public string Name { get; }
-    public Person(string name) => Name = name;
-}
-class Company
-{
-    Person[] personnel;
-    public Company(Person[] personnel) => this.personnel = personnel;
-    public int Length => personnel.Length;
-    public IEnumerable<Person> GetPersonnel(int max)
-    {
         try
         {
-            for (int i = 0; i < max; i++)
+            for (long digit = 0; digit <= 10; digit++)
             {
-                if (i == personnel.Length)
+                if (digit % 2 == 0)
                 {
-                    yield break;
-                }
-                else
-                {
-                    yield return personnel[i];
+                    yield return digit;
+                    //throw new Exception("error");
                 }
             }
         }
         finally
         {
-            Console.WriteLine("Dispose");
+            Console.WriteLine("Disposible sequence");
+        }
+      
+    }
+
+    public static void Main()
+    {
+
+        try
+        {
+            foreach (var x in Even())
+            {
+                Console.WriteLine(x);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            Console.WriteLine("finally Main");
         }
     }
 }
+
+
+
+
+//var people = new Person[]
+//{
+//    new Person("Tom"),
+//    new Person("Bob"),
+//    new Person("Sam")
+//};
+//var microsoft = new Company(people);
+
+//try
+//{
+//    foreach (Person employee in microsoft.GetPersonnel(5))
+//    {
+//        Console.WriteLine(employee.Name);
+//            throw new Exception("error");
+//    }
+//}
+//catch (Exception ex)
+//{
+
+//    Console.WriteLine(ex.Message);
+//}
+
+//class Person
+//{
+//    public string Name { get; }
+//    public Person(string name) => Name = name;
+//}
+//class Company
+//{
+//    Person[] personnel;
+//    public Company(Person[] personnel) => this.personnel = personnel;
+//    public int Length => personnel.Length;
+//    public IEnumerable<Person> GetPersonnel(int max)
+//    {
+//        try
+//        {
+//            for (int i = 0; i < max; i++)
+//            {
+//                if (i == personnel.Length)
+//                {
+//                    yield break;
+//                }
+//                else
+//                {
+//                    yield return personnel[i];
+//                }
+//            }
+//        }
+//        finally
+//        {
+//            Console.WriteLine("Dispose");
+//        }
+//    }
+//}
